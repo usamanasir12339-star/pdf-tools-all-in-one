@@ -1,0 +1,6 @@
+{
+  "name": "Shiftwheel - Universal File Converter",
+  "description": "Convert and edit across 244 formats in 17 categories with local processing, liquid-glass radial menu, and multi-file batch engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

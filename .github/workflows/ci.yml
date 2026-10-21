@@ -1,0 +1,37 @@
+name: CI Build & Automated Tests
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Install system engines (FFmpeg, ImageMagick, Ghostscript)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg imagemagick ghostscript
+
+    - name: Install npm dependencies
+      run: npm ci
+
+    - name: TypeScript typecheck
+      run: npm run lint
+
+    - name: Build production applet
+      run: npm run build
+
+    - name: Run automated 30-point conversion test suite
+      run: npx tsx -e 'import { runAllTests } from "./src/server/testRunner"; runAllTests().then(r => { if (r.failed > 0) process.exit(1); console.log("All tests passed!"); });'

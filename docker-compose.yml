@@ -1,0 +1,11 @@
+services:
+  shiftwheel:
+    build: .
+    image: shiftwheel:latest
+    container_name: shiftwheel_app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped

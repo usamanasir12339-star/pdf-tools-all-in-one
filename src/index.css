@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #2a150c;
+  --bg-gradient: radial-gradient(circle at 100% 100%, #9a84c9, transparent 55%), linear-gradient(160deg, #e8a93a 0%, #e8743b 50%, #eb5a55 100%);
+  --bg-solid: #e8743b;
+  --glass: rgba(255, 255, 255, 0.28);
+  --glass-card: rgba(255, 255, 255, 0.45);
+  --rim: rgba(255, 255, 255, 0.75);
+  --slice: #f7d9b5;
+  --hot: #e8532b;
+  --lab: #3a1c0e;
+  --pill: rgba(255, 238, 215, 0.95);
+  --border-color: rgba(255, 255, 255, 0.4);
+}
+
+:root[data-theme="dark"] {
+  --ink: #fff1e3;
+  --bg-gradient: radial-gradient(circle at 100% 100%, #3a3068, transparent 55%), linear-gradient(160deg, #4d2b07 0%, #5c2311 50%, #4f1519 100%);
+  --bg-solid: #23120c;
+  --glass: rgba(30, 20, 16, 0.65);
+  --glass-card: rgba(45, 25, 20, 0.75);
+  --rim: rgba(255, 255, 255, 0.18);
+  --slice: rgba(255, 214, 170, 0.25);
+  --hot: #ff6838;
+  --lab: #fff3e6;
+  --pill: rgba(50, 25, 18, 0.9);
+  --border-color: rgba(255, 255, 255, 0.12);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Inter, system-ui, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-gradient) fixed;
+  background-color: var(--bg-solid);
+  overflow-x: hidden;
+}
+
+.liquid-glass {
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: inset 0 0 0 1.5px var(--rim), inset 0 8px 24px rgba(255, 255, 255, 0.2), 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.liquid-card {
+  background: var(--glass-card);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: inset 0 0 0 1px var(--rim), 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.sl {
+  cursor: pointer;
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sl path {
+  fill: var(--slice);
+  stroke: var(--slice);
+  stroke-width: 12;
+  stroke-linejoin: round;
+  transition: fill 0.2s, stroke 0.2s;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+}
+
+.sl text {
+  font: 800 12.5px -apple-system, system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  fill: var(--lab);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+  transition: fill 0.2s;
+}
+
+.sl.on {
+  transform: scale(1.06);
+}
+
+.sl.on path {
+  fill: var(--hot);
+  stroke: var(--hot);
+}
+
+.sl.on text {
+  fill: #ffffff;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pop {
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
